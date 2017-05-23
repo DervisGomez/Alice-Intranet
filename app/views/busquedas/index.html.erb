@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Búsquedas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripción</th>
+      <th>Estatus</th>
+      <th>Tipo Búsqueda</th>
+      <th>Especialidad</th>
+      <th>Especialista</th>
+      <th>Tipo Servicio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @busquedas.each do |busqueda| %>
+      <tr>
+        <td><%= busqueda.descripcion %></td>
+        <td><%= busqueda.estatus %></td>
+        <td><%= busqueda.tipo_busqueda %></td>
+        <td><%= busqueda.especialidad %></td>
+        <td><%= busqueda.especialista %></td>
+        <td><%= busqueda.tipo_servicio %></td>
+        <td><%= link_to 'Editar', edit_busqueda_path(busqueda),:class => "btn btn-warning btn-sm" %></td>
+        <td><%= link_to 'Eliminar', busqueda, method: :delete, data: { confirm: '¿Está seguro que desea eliminar el registro?',:class => "btn btn-danger btn-sm" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Registrar', new_busqueda_path,:class => "btn btn-primary btn-sm  %>

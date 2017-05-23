@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Saludos <%= @cita.usuario.email %></h1>
+<p>
+  Su cita #<%= @cita.id %> para <b><%= @cita.turno.horario.servicio.descripcion %></b> el dia <%= @cita.fecha %> ha sido cancelada debido a <%= @cita.eventualidad.descripcion %>.
+</p>
+<p>
+	<%= @texto %>
+</p>
+</body>
+</html>

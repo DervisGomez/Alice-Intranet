@@ -1,0 +1,22 @@
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            </div>
+            <% if usuario_signed_in? %>
+            <ul class="nav navbar-top-links navbar-right">
+              <li>
+                    <div class="chip">
+                        <%= image_tag "a6.jpg" , :style => " width: 20px; heigth: 20px;" %>
+                         <%= link_to current_usuario.email, '/perfil', :style => 'color: #FFFFFF;' %>
+                    </div>
+                 </li>
+                <li>
+                    <%= link_to destroy_usuario_session_path, style: 'font-family: inherit;' do %>
+                        <i class="fa fa-sign-out"></i> Cerrar Sesión
+                    <% end %> 
+                </li>
+            </ul>
+            <% end %>
+        </nav>
+    </div>

@@ -1,0 +1,30 @@
+
+<h1>Calificaciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripción</th>
+      <th>Estatus</th>
+      <th>Tipo calificación</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @calificaciones.each do |calificacion| %>
+      <tr>
+        <td><%= calificacion.descripcion %></td>
+        <td><%= calificacion.estatus %></td>
+        <td><%= calificacion.tipo_calificacion %></td>
+        <td><%= link_to 'Show', calificacion %></td>
+        <td><%= link_to 'Edit', edit_calificacion_path(calificacion) %></td>
+        <td><%= link_to 'Destroy', calificacion, method: :delete, data: { confirm: '¿Está seguro que desea eliminar la calificacion?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Calificacion', new_calificacion_path %>

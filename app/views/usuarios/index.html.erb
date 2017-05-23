@@ -1,0 +1,47 @@
+<%= csrf_meta_tag %>
+<br>
+<div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h2 class="parametros-titulo"><%= "Usuarios" %></h2>
+              </div>
+          </div>
+<div class="ibox-content">
+<%= link_to 'Registrar', "/usuarios/registrar", :class => "btn btn-primary btn-sm" %>
+ <br><br> 
+
+ <table class="footable table table-stripped" data-sorting="true" data-filtering="true">
+    <thead>
+      <tr>
+        <th data-sorted="true">Rol</th>
+        <th data-breakpoints="xs">Correo</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @usuarios.each do |usuario| %>
+          <tr>
+            <td><%= usuario.rol.descripcion %></td>
+            <td><%= usuario.email%></td>
+            <td>
+                    <%= link_to 'Editar', "/usuarios/editar/"+usuario.id.to_s, :class => "btn btn-warning btn-sm " %>
+                    <%= link_to 'Eliminar', "/usuarios/eliminar/"+usuario.id.to_s, :method => :delete, data: { confirm: '¿Estás seguro?' } , :class => "btn btn-danger btn-sm " %>
+                  </td>
+          </tr>
+      <% end %>
+    </tbody>
+      <tfoot>
+        <tr>
+            <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+            </td>
+        </tr>
+      </tfoot>
+  </table>
+</div>
+<br>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.table').footable();
+  });
+
+</script>

@@ -1,0 +1,53 @@
+<%= csrf_meta_tag %>
+<br>
+<div class="ibox float-e-margins">
+  <div class="ibox-title">
+    <h2 class="parametros-titulo">Eventualidades</h2>
+  </div>
+</div>
+
+<div class="ibox-content">
+  <%= link_to "Registrar", new_eventualidad_path, :class => "btn btn-primary btn-sm" %>
+  <br><br>
+  <table class="footable table table-stripped" data-sorting="true" data-filtering="true">
+    <thead>
+    <tr>
+      <th data-breakpoints="xs" data-sorted="true">Tipo</th>
+      <th>Motivo</th>
+      <th>Descripción</th>
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th colspan="1"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @eventualidades.each do |eventualidad| %>
+        <tr>
+          <td><%= eventualidad.tipo.descripcion %></td>
+          <td><%= eventualidad.motivo.descripcion%></td>
+          <td><%= eventualidad.descripcion %></td>
+          <td><%= eventualidad.fecha_inicio.strftime("%d/%m/%Y %H:%M %p") %></td>
+          <td><%= eventualidad.fecha_fin.strftime("%d/%m/%Y %H:%M %p") %></td>
+        </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="5">
+        <ul class="pagination pull-right"></ul>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+<br>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.table').footable();
+  });
+
+</script>
+
+

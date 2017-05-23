@@ -1,0 +1,93 @@
+<div class="row">   
+   <div class="col-lg-6 col-lg-offset-3">
+      <div class="ibox float-e-margins">
+          <div class="ibox-title">
+              <h2 class="parametros-titulo"><%= @evaluacion.class.titulo %></h2>
+          </div>
+      </div>
+      <div class="ibox-content">
+         <%= form_for @evaluacion, :html => {:class => 'form-horizontal'} do |f| %>
+              <% if @evaluacion.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@evaluacion.errors.count, "error") %> prohibited this evaluacion from being saved:</h2>
+                  <ul>
+                  <% @evaluacion.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <%= hidden_field_tag :cita, @cita.id %>
+
+
+
+              <div class="col-lg-12" style="padding-bottom: 10px">
+              <% @evaluacion.calificaciones.each do |cal| %>
+                  <%= f.fields_for :calificaciones, cal  do |calificaciones_form| %>
+
+                    <div class="col-lg-12">
+                      <%= calificaciones_form.label :criterio_id, Criterio.find(cal.criterio_id).descripcion %>
+                      </div>
+                      <div class="col-lg-12">
+                        <%= calificaciones_form.hidden_field :id %>
+                        <%= calificaciones_form.hidden_field :criterio_id %>
+                        <%= calificaciones_form.hidden_field :tipo_calificacion_id %><div class="col-lg-3" style="margin-top: 10px;">
+                          Calificacion:
+                      </div>
+                      <div class="col-lg-9">
+                      <!--<input type="radio" name="prueba" onclick="calificar(2);" />-->
+                        <fieldset class="rating" >
+                          <%= calificaciones_form.radio_button(:descripcion, "5", :id =>  cal.criterio_id.to_s + '-5', :required => true) %>
+                          <%= calificaciones_form.label "5", {:id => cal.criterio_id, :title => "Muy bueno", :onclick => "calificar(this.id, '5')"} %>
+
+                          <%= calificaciones_form.radio_button(:descripcion, "4", :id => cal.criterio_id.to_s + '-4') %>
+                          <%= calificaciones_form.label "4", {:id => cal.criterio_id, :title => "Bueno", :onclick => "calificar(this.id, '4')"} %>
+
+                          <%= calificaciones_form.radio_button(:descripcion, "3", :id => cal.criterio_id.to_s + '-3') %>
+                          <%= calificaciones_form.label "3", {:id => cal.criterio_id, :title => "Normal", :onclick => "calificar(this.id, '3')"} %>
+
+                          <%= calificaciones_form.radio_button(:descripcion, "2", :id => cal.criterio_id.to_s + '-2') %>
+                          <%= calificaciones_form.label "2", {:id => cal.criterio_id, :title => "Mal", :onclick => "calificar(this.id, '2')"} %>
+
+                          <%= calificaciones_form.radio_button(:descripcion, "1", :id => cal.criterio_id.to_s + '-1') %>
+                          <%= calificaciones_form.label "1", {:id => cal.criterio_id, :title => "Muy mal", :onclick => "calificar(this.id, '1')"} %>
+                      </fieldset>
+
+
+                    </div>
+                    <script type="text/javascript">
+                      function calificar(id, pos) {
+                        $( "#" + id + '-' + pos ).prop( "checked", true );
+                      }
+                    </script>
+                    <style type="text/css">
+                      .rating{float:left}.rating:not(:checked) > input{position:absolute;top:-9999px;clip:rect(0, 0, 0, 0)}.rating:not(:checked) > label{float:right;width:1.2em;padding:0 .1em;overflow:hidden;white-space:nowrap;cursor:pointer;font-size:200%;line-height:1.2;color:#ddd;text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5)}.rating:not(:checked) > label:before{content:'★ '}.rating > input:checked ~ label{color:#f70;text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0, 0, 0, .5)}.rating:not(:checked) > label:hover,.rating:not(:checked) > label:hover ~ label{color:gold;text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5)}.rating > input:checked + label:hover,.rating > input:checked + label:hover ~ label,.rating > input:checked ~ label:hover,.rating > input:checked ~ label:hover ~ label,.rating > label:hover ~ input:checked ~ label{color:#ea0;text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5)}.rating > label:active{position:relative;top:2px;left:2px}
+                    </style>
+
+                    </div>
+
+                  <% end %>
+                <% end %>
+              </div>
+
+
+
+               <div class="form-group">
+<br>
+                     <div class="col-lg-offset-3 col-lg-2">
+                          <%= f.submit "Guardar", :class => "btn btn-sm btn-primary" %>
+                      </div>
+                      <% if (@evaluacion.new_record?) %>
+                        <div class="col-lg-2">
+                        <%= link_to 'Limpiar', '', type: :reset, :class => "btn btn-sm btn-warning" %>
+                        </div>
+                        <% end %>
+                      <div class="col-lg-2">
+                      <%= link_to 'Atras', polymorphic_url(@evaluacion.class), :class => "btn btn-sm btn-success " %>
+                      </div>
+                  </div>
+          <% end %>
+      </div>
+  </div>
+</div>

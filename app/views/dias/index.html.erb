@@ -1,0 +1,28 @@
+
+<h1>Dias</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th>Estatus</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dias.each do |dia| %>
+      <tr>
+        <td><%= dia.descripcion %></td>
+        <td><%= dia.estatus %></td>
+        <td><%= link_to 'Show', dia %></td>
+        <td><%= link_to 'Edit', edit_dia_path(dia) %></td>
+        <td><%= link_to 'Destroy', dia, method: :delete, data: { confirm: '¿Está seguro que desea eliminar el día?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dia', new_dia_path %>

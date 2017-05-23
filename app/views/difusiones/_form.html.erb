@@ -1,0 +1,127 @@
+<br>
+<div class="row">   
+   <div class="col-lg-10 col-lg-offset-1">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h2 class="parametros-titulo"><%= "Difusión" %></h2>
+              </div>
+          </div>
+          <div class="ibox-content">
+
+          <%= form_for @difusion, :html => {:class => 'form-horizontal', :multipart => true } do |f| %>
+                  <% if @difusion.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@difusion.errors.count, "error") %> prohibited this parametro from being saved:</h2>
+
+                      <ul>
+                      <% @difusion.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#datos">Difusión</a></li>
+                <li><a data-toggle="tab" href="#texto">Texto</a></li>
+              </ul>
+
+              <div class="tab-content">
+
+                <div id="datos" class="tab-pane fade in active">
+                  <br>
+                  <div class="field form-group">
+                    <label class="col-lg-2 control-label">Tipo de Difusión</label>
+                    <div class="col-lg-10">
+                      <%= f.collection_select(:tipo_difusion_id, @tipo_difusiones, :id, :descripcion, {},{:class => "form-control"}) %>
+                    </div>
+                    
+                  </div>
+
+                  <div class="field form-group">
+                    <label class="col-lg-2 control-label">Tipo de Entidad</label>
+                    <div class="col-lg-10">
+                      <%= f.collection_select(:tipo_entidad_id, @tipo_entidades, :id, :descripcion, {},{:class => "form-control"}) %>
+                    </div>
+                    
+                  </div>
+                  
+
+                  <div class="field form-group">
+                    <label class="col-lg-2 control-label">Entidad</label>
+                    <div class="col-lg-10">
+                      <%= f.collection_select(:entidad_id, @entidades, :id, :descripcion, {},{:class => "form-control"}) %>
+                    </div>
+                    
+                  </div>
+
+                  <div class="field form-group">
+                    <label class="col-lg-2 control-label">Medio de Difusión</label>
+                    <div class="container-fluid col-lg-10">
+                      <% if Configuracion.envia_email %>
+                        <div class="col-sm-3">
+                            <%= check_box_tag('medios[]', 1, (Configuracion.envia_email)) %> <%= MedioDifusion.find(1).descripcion %>
+                        </div>
+                      <% end %>
+                      
+                      <div class="col-sm-3">
+                          <%= check_box_tag('medios[]', 2, (true)) %> <%= MedioDifusion.find(2).descripcion %>
+                      </div>
+                      <% if Configuracion.envia_notificaciones %>
+                        <div class="col-sm-3">
+                            <%= check_box_tag('medios[]', 3, (Configuracion.envia_notificaciones)) %> <%= MedioDifusion.find(3).descripcion %>
+                        </div>
+                      <% end %>
+                  </div>
+                    
+                  </div>
+
+                  <div class="form-group">
+                      <label class="col-lg-2 control-label">Asunto</label>
+
+                      <div class="col-lg-10"><%= f.text_field :asunto, :class => "form-control", :required => true %>
+                       </div>
+                    </div>
+
+                   <div class="form-group">
+                      <label class="col-lg-2 control-label">Foto</label>
+
+                      <div class="col-lg-10"><%= f.file_field :avatar, :class => "form-control" %>
+                       </div>
+                    </div>
+                </div>
+
+                <div id="texto" class="tab-pane fade">
+                  <br>
+                  <div class="form-group">
+                      <label class="col-lg-2 control-label">Texto</label>
+
+                      <div class="col-lg-10"><%= f.text_area :texto, :class => "tinymce form-control" %>
+                       </div>
+
+                      <%= tinymce :language => "es_MX" %>
+                    </div>
+                </div>
+
+
+              </div>
+
+           
+          <div class="form-group">
+                      <div class="col-lg-offset-3 col-lg-2">
+                           <%= f.submit "Guardar", :class => "btn btn-sm btn-primary" %>
+                      </div>
+                        <div class="col-lg-2">
+                        <%= link_to 'Limpiar', '', type: :reset, :class => "btn btn-sm btn-warning " %>                          
+                        </div>
+                      <div class="col-lg-2">
+                      <%= link_to 'Atras',difusiones_path, :class => "btn btn-sm btn-success" %>                          
+                      </div>
+                  </div>
+                  
+          <% end %>
+          </div>
+         
+  </div>
+
+</div>

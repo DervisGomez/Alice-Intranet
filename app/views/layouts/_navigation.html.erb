@@ -1,0 +1,36 @@
+ <% if usuario_signed_in? %>
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                <%= image_tag "alice-horizontal1.png" , :style => " max-width: 150px; max-heigth: 70px;" %>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Mi Cuenta</strong>
+                                <%= current_usuario.email %>
+                            </span>
+                        </span>
+                    </a>
+                    <ul class="mi-cuenta dropdown-menu animated fadeInRight m-t-xs" style="background: #354C9E none repeat scroll 0% 0%;">
+                        <li><a href="/perfil" style="color: #FFFFFF;"><i class="fa fa-user"></i> Editar Perfil</a></li>
+                        <li><a href="<%= destroy_usuario_session_path %>" style="color: #FFFFFF;"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    <%= image_tag "alice_sq.png" , :style => " max-width: 50px; max-heigth: 50px;" %>
+                </div>
+            </li>
+            <li class="<%= 'active' if current_page?('/') %>">
+                <%= link_to "/" do %>
+                <i class="fa fa-laptop"></i> <span class="nav-label">Inicio</span>
+                <% end %>
+            </li>
+             <!-- Navigation Menu -->
+            <%= render 'layouts/navigation-menu' %>
+        </ul>
+
+    </div>
+</nav>
+<% end %>

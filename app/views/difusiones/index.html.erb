@@ -1,0 +1,46 @@
+<%= csrf_meta_tag %>
+<br>
+<div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h2 class="parametros-titulo"><%= "Difusiones" %></h2>
+              </div>
+          </div>
+<div class="ibox-content">
+<%= link_to 'Registrar', new_difusion_path, :class => "btn btn-primary btn-sm" %>
+ <br><br> 
+
+ <table class="footable table table-stripped" data-sorting="true" data-filtering="true">
+    <thead>
+      <tr>
+        <th data-sorted="true">Tipo</th>
+        <th data-breakpoints="xs">Asunto</th>
+        <th data-breakpoints="xs">Entidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @difusiones.each do |difusion| %>
+          <tr>
+            <td><%= difusion.tipo_difusion.descripcion %></td>
+            <td><%= difusion.asunto %></td>
+            <td><%= difusion.entidad.descripcion%></td>            
+          </tr>
+      <% end %>
+    </tbody>
+      <tfoot>
+        <tr>
+            <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+            </td>
+        </tr>
+      </tfoot>
+  </table>
+</div>
+<br>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+$('.table').footable();
+});
+
+</script>

@@ -1,0 +1,51 @@
+
+<div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h2 class="parametros-titulo"><%= "Opiniones" %></h2>
+              </div>
+          </div>
+
+<div class="ibox-content">
+ <br><br> 
+ <table class="footable table table-stripped" data-sorting="true" data-filtering="true">
+    <thead>
+      <tr>
+        <th data-breakpoints="xs" data-sorted="true">Tipo de Opinión</th>
+        <th>Correo</th>
+        <th>Cliente</th>
+        <th>Comentario</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @opiniones.each do |opinion| %>
+          <tr>
+            <td><%= opinion.tipo_opinion.descripcion %></td>
+            <td><%= opinion.correo %></td>
+            <td><%= opinion.nombre %></td>
+            <td><%= opinion.descripcion %></td>
+            <td><%= link_to 'Eliminar', opinion, method: :delete, data: { confirm: '¿Está seguro que desea eliminar la opinion?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+  </table>
+</div>
+<br>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+$('.table').footable();
+});
+
+
+</script>
+
+

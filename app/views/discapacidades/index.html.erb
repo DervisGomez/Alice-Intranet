@@ -1,0 +1,30 @@
+
+<h1>Discapacidades</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th>Estatus</th>
+      <th>Tipodiscapacidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @discapacidades.each do |discapacidad| %>
+      <tr>
+        <td><%= discapacidad.descripcion %></td>
+        <td><%= discapacidad.estatus %></td>
+        <td><%= discapacidad.TipoDiscapacidad %></td>
+        <td><%= link_to 'Show', discapacidad %></td>
+        <td><%= link_to 'Edit', edit_discapacidad_path(discapacidad) %></td>
+        <td><%= link_to 'Destroy', discapacidad, method: :delete, data: { confirm: '¿Está seguro que desea eliminar la discapacidad?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Discapacidad', new_discapacidad_path %>
